@@ -1,0 +1,140 @@
+## Introducing the console and command
+
+- check version of Ruby
+$ ruby -v
+
+- check version of Rails
+$ rails-v
+
+## Call it even with RVM
+
+http://rvm.io
+
+$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+$ \curl -sSL https://get.rvm.io | bash -s stable
+$ echo "source $HOME/.rvm/scripts/rvm" >> ~/.bash_profile
+$ source $HOME/.rvm/scripts/rvm
+$ rvm
+$ rvm install 2.1.1
+$ rvm use 2.1.1
+$ rvm use ruby-2.1.1@rails4.1.0 --create
+$ gem install rails -v 4.1.0
+$ rvm use ruby-2.1.1@rails4.1.0 --default
+
+## Rails project skeletom
+$ rails new blog
+$ cd blog
+$ bundle install
+$ bundle exec rails server
+
+## Rails server
+crtl + c --> exit rails serverbun
+google: nitrous keybord shortcuts
+
+## Scaffolding For Blog Posts
+$ bundle exec rails generate scaffold Post title:string body:text
+$ bundle exec rake db:migrate --> get the database ready
+$ bundle exec rails server
+--> http://project1-blog-193973.usw1-2.nitrousbox.com/posts/
+
+## Home page bootstrap
+add the following code in config/routes.rb
+>>>>>>>>>>>>>>>>>
+root 'posts#index' // route the home pages to posts
+<<<<<<<<<<<<<<<<<
+
+add bootstrap style to control
+1. indentify the elements needs to be styled
+2. Go to bootstrap website --> click on CSS --> find the demo of the control (eg. table, forms, button)
+
+
+## Its a date
+post.created_at.to_date
+
+=======================================================================================
+=                                                                                     =
+=                                        Section 3                                    =
+=                                                                                     =
+=======================================================================================
+
+HTML is like furnitures in a house - the block of the page contents 
+(text, image, video, link, form button ...)
+CSS is like paint, the way to orgnize the layout of the furnitures
+
+Two websites for evaluate HTML code
+jsbin.com
+jsfiddle.net
+codepen.io
+
+## CSS
+
+google: free parallax template
+use 3cschool as a refrence when work with CSS
+
+google: css gradient
+http://www.colorzilla.com/gradient-editor/
+
+google: box shadow
+google: css vendor prefix
+google: sckeleton grid
+
+javascript equal check
+
+2 == '2' ==> true
+2 === '2' ==> false
+
+# new project, github, heroku
+
+$ heroku keys:add
+$ heroku create
+Creating gentle-temple-1133... done, stack is cedar-14                                                                                                                                                                                         
+https://gentle-temple-1133.herokuapp.com/ | https://git.heroku.com/gentle-temple-1133.git
+
+Git remote heroku added 
+
+$ git push heroku master
+$ heroku domains
+
+$ bundle exec rails s -->  for review the website in test mode
+
+$ git checkout -b site_pages
+
+$ rails generate controller pages
+
+$ git checkout master
+$ git merge site_pages
+
+NEVER NEVER MAKE CHANGE ON MASTER BRANCH!!! MAKE CHANGE ON A BRANCH AND MERGE IT TO MASTER LATTER
+
+$ bundle exec rake routes // list details of routes
+
+## Contacts Database
+
+1. create a database tables
+
+To do that in rails, we need to create a migration files, in which we specify what we want to do with the database, either create a table or add a column to the table.
+
+$ bundle exec rails generate migration CreateContacts // generate migration file
+$ bundle exec rake db:migrate // run migration to create or update table in the database
+
+$ bundle exec rails console // interactive ruby console
+
+2.1.1 :002 > @contact = Contact.new
+=> #<Contact id: nil, name: nil, email: nil, comments: nil, created_at: nil, updated_at: nil> 
+
+2.1.1 :003 > @contact.name = "Eric Zhu" 
+=> "Eric Zhu"                                                                                                                                                                                                                                 
+2.1.1 :004 > @contact
+=> #<Contact id: nil, name: "Eric Zhu", email: nil, comments: nil, created_at: nil, updated_at: nil>
+
+2.1.1 :005 > @contact.name
+=> "Eric Zhu"
+
+2.1.1 :006 > @contact.save // Save the object to the database
+   (0.2ms)  begin transaction
+   SQL (0.6ms)  INSERT INTO "contacts" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", "2015-02-16 04:06:48.577805"], ["name", "Eric Zhu"], ["updated_at", "2015-02-16 04:06:48.577805"]]
+   (37.9ms)  commit transaction
+ => true
+
+2.1.1 :007 > Contact.first
+Contact Load (0.3ms)  SELECT  "contacts".* FROM "contacts"   ORDER BY "contacts"."id" ASC LIMIT 1
