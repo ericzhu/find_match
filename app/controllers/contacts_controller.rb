@@ -5,8 +5,13 @@ class ContactsController < ApplicationController
 
 	def create
 		@contact = Contact.new(contact_params)
+		puts contact_params.inspect
+
 		if @contact.save
 			flash[:success] = "Message sent."
+			# puts "--------- " + new_contact_path.inspect
+			# puts "--------- " + contact_params.inspect
+
 			redirect_to new_contact_path
 		else
 			flash[:danger] = "Error occured, message has not been sent."
