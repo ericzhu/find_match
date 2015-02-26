@@ -11,6 +11,8 @@ gem 'sdoc',                 '0.4.0', group: :doc
 
 # Use bootstrap for styles
 gem 'bootstrap-sass', 		'3.3.3'
+# Use font awesome for icons
+gem 'font-awesome-sass', 	'4.3.0'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
