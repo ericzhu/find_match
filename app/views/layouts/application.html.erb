@@ -31,6 +31,13 @@
 	</div>
 </nav>
 <div class="container">
+	<% flash.each do |key, value| %>
+		
+		<%= content_tag :div, class: "alert alert-#{key}" do %>
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<%= value %>
+		<% end %>
+	<% end %>
 	<%= yield %>
 </div>
 </body>
